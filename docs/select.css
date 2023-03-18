@@ -38,10 +38,7 @@
   position: relative;
 
   --bs-bg-opacity: 1;
-  background-color: rgba(
-    var(--bs-primary-rgb),
-    var(--bs-bg-opacity)
-  );
+  background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
 
   margin-right: 0.25rem;
   margin-top: 1px;

@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import copy from "rollup-plugin-copy";
 
 export default {
   input: "select.ts",
@@ -24,5 +25,15 @@ export default {
     },
   ],
   external: ["bootstrap"],
-  plugins: [typescript()],
+  plugins: [
+    typescript(),
+    copy({
+      targets: [
+        {
+          src: "dist/select.js",
+          dest: "docs",
+        },
+      ],
+    }),
+  ],
 };
