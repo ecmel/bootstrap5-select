@@ -32,7 +32,7 @@ export default {
     copy({
       targets: [
         {
-          src: "dist/select.js",
+          src: ["dist/select.js", "dist/select.js.map"],
           dest: "docs",
         },
       ],
