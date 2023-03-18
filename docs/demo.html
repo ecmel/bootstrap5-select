@@ -10,8 +10,7 @@
       crossorigin="anonymous"
     />
     <link href="select.css" rel="stylesheet" />
-    <style></style>
-    <title>Select</title>
+    <title>Bootstrap 5 Select</title>
   </head>
   <body>
     <div class="container" data-controller="home">
@@ -216,7 +215,7 @@
     <script>
       document
         .querySelectorAll(".select")
-        .forEach((el) => new select.Select(el));
+        .forEach((el) => new bootstrap5.Select(el));
 
       const validate = new window.JustValidate("#form", {
         successFieldStyle: "",

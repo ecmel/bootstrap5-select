@@ -41,7 +41,7 @@
   background-color: rgba(
     var(--bs-primary-rgb),
     var(--bs-bg-opacity)
-  ) !important;
+  );
 
   margin-right: 0.25rem;
   margin-top: 1px;

@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "./",
     "module": "es6",
     "target": "es6",
-    "moduleResolution": "nodenext"
+    "moduleResolution": "nodenext",
+    "declaration": true
   },
   "exclude": ["node_modules"]
 }

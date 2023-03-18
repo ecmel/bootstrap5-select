@@ -6,7 +6,7 @@ export default {
     {
       file: "dist/select.js",
       format: "iife",
-      name: "select",
+      name: "bootstrap5",
       globals: {
         bootstrap: "bootstrap",
       },
@@ -24,5 +24,5 @@ export default {
     },
   ],
   external: ["bootstrap"],
-  plugins: [typescript({ tsconfig: "tsconfig.json" })],
+  plugins: [typescript()],
 };
