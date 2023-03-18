@@ -1,0 +1,37 @@
+{
+  "name": "bootstrap5-select",
+  "version": "0.0.1",
+  "description": "Bootstrap 5 Select Component",
+  "author": {
+    "name": "Ecmel Ercan",
+    "url": "https://github.com/sponsors/ecmel"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bootstrap",
+    "select",
+    "tags"
+  ],
+  "exports": {
+    "default": "./dist/select.mjs",
+    "require": "./dist/select.cjs",
+    "import": "./dist/select.mjs",
+    "node": "./dist/select.mjs",
+    "types": "./dist/select.d.ts"
+  },
+  "main": "./dist/select.js",
+  "module": "./dist/select.mjs",
+  "scripts": {
+    "clean": "git clean -Xdf",
+    "format": "prettier --ignore-path .gitignore --write .",
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/bootstrap": "^5.2.6",
+    "bootstrap": "^5.2.3",
+    "prettier": "^2.8.4",
+    "rollup": "^3.19.1",
+    "tslib": "^2.5.0"
+  }
+}
