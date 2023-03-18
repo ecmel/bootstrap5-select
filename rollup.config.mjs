@@ -1,3 +1,4 @@
+import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 import copy from "rollup-plugin-copy";
 
@@ -27,6 +28,7 @@ export default {
   external: ["bootstrap"],
   plugins: [
     typescript(),
+    terser(),
     copy({
       targets: [
         {

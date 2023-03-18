@@ -1,6 +1,6 @@
 {
   "name": "bootstrap5-select",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Bootstrap 5 Select Component",
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "build": "rollup -c"
   },
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/bootstrap": "^5.2.6",
     "bootstrap": "^5.2.3",
