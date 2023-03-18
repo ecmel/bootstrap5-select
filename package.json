@@ -1,7 +1,11 @@
 {
   "name": "bootstrap5-select",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Bootstrap 5 Select Component",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecmel/bootstrap5-select.git"
+  },
   "author": {
     "name": "Ecmel Ercan",
     "url": "https://github.com/sponsors/ecmel"
