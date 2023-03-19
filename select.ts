@@ -22,7 +22,11 @@ export class Select {
       this.#element.dataset.mutable === "" ||
       this.#element.dataset.mutable === "true";
 
-    this.#onSelectChange();
+    for (const option of this.#select.options) {
+      if (option.selected) {
+        this.#addTag(option.label, option.value);
+      }
+    }
 
     Object.defineProperty(this.#element, "value", { get: this.#getValue });
 
@@ -33,7 +37,6 @@ export class Select {
     this.#input.addEventListener("show.bs.dropdown", this.#onShowBsDropdown);
     this.#input.addEventListener("shown.bs.dropdown", this.#onShownBsDropdown);
 
-    this.#select.addEventListener("change", this.#onSelectChange);
     this.#element.addEventListener("click", this.#onClick);
   }
 
@@ -269,15 +272,5 @@ export class Select {
     this.#addTag(label, value);
     this.#resetInput();
     this.#dispatchInput();
-  };
-
-  #onSelectChange = () => {
-    this.#element.querySelectorAll(".option").forEach((el) => el.remove());
-
-    for (const option of this.#select.options) {
-      if (option.selected) {
-        this.#addTag(option.label, option.value);
-      }
-    }
   };
 }
