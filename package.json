@@ -1,6 +1,6 @@
 {
   "name": "bootstrap5-select",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Bootstrap 5 Select Component",
   "repository": {
     "type": "git",
@@ -20,15 +20,9 @@
     "dist",
     "select.scss"
   ],
-  "exports": {
-    "default": "./dist/select.mjs",
-    "require": "./dist/select.cjs",
-    "import": "./dist/select.mjs",
-    "node": "./dist/select.mjs",
-    "types": "./dist/select.d.ts"
-  },
   "main": "./dist/select.cjs",
   "module": "./dist/select.mjs",
+  "types": "./dist/select.d.ts",
   "sass": "./select.scss",
   "scripts": {
     "clean": "git clean -Xdf",

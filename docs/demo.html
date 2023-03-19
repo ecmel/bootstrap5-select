@@ -16,6 +16,7 @@
     <div class="container" data-controller="home">
       <form id="form">
         <div class="mt-3 mb-3">
+          <label for="name" class="form-label">Simple Input:</label>
           <input
             class="form-control"
             type="text"
@@ -25,8 +26,9 @@
         </div>
 
         <div class="mb-3">
+          <label for="city_input" class="form-label">Select a city:</label>
           <div id="city" class="form-control select">
-            <input type="text" data-bs-toggle="dropdown" />
+            <input id="city_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
             <select name="city" multiple hidden>
               <option value="01">ADANA</option>
@@ -114,8 +116,11 @@
         </div>
 
         <div class="mb-3">
+          <label for="place_input" class="form-label"
+            >Select a place (Mutable):</label
+          >
           <div id="place" class="form-control select" data-mutable>
-            <input type="text" data-bs-toggle="dropdown" />
+            <input id="place_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
             <select name="place" multiple hidden>
               <option value="01">ADANA</option>
@@ -213,39 +218,49 @@
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script src="select.js"></script>
     <script>
-      document
-        .querySelectorAll(".select")
-        .forEach((el) => new bootstrap5.Select(el));
+      ready(() => {
+        document
+          .querySelectorAll(".select")
+          .forEach((el) => new bootstrap5.Select(el));
 
-      const validate = new window.JustValidate("#form", {
-        successFieldStyle: "",
-        successFieldCssClass: "is-valid",
-        errorFieldStyle: "",
-        errorFieldCssClass: "is-invalid",
-        successLabelStyle: "",
-        successLabelCssClass: "valid-feedback",
-        errorLabelStyle: "",
-        errorLabelCssClass: "invalid-feedback",
-        focusInvalidField: false,
+        const validate = new window.JustValidate("#form", {
+          successFieldStyle: "",
+          successFieldCssClass: "is-valid",
+          errorFieldStyle: "",
+          errorFieldCssClass: "is-invalid",
+          successLabelStyle: "",
+          successLabelCssClass: "valid-feedback",
+          errorLabelStyle: "",
+          errorLabelCssClass: "invalid-feedback",
+          focusInvalidField: false,
+        });
+
+        validate
+          .addField("#name", [
+            {
+              rule: "required",
+            },
+          ])
+          .addField("#city", [
+            {
+              rule: "required",
+            },
+          ])
+          .addField("#place", [
+            {
+              rule: "minNumber",
+              value: 2,
+            },
+          ]);
       });
 
-      validate
-        .addField("#name", [
-          {
-            rule: "required",
-          },
-        ])
-        .addField("#city", [
-          {
-            rule: "required",
-          },
-        ])
-        .addField("#place", [
-          {
-            rule: "minNumber",
-            value: 2,
-          },
-        ]);
+      function ready(resolve) {
+        if (document.readyState == "loading") {
+          document.addEventListener("DOMContentLoaded", () => resolve());
+        } else {
+          resolve();
+        }
+      }
     </script>
   </body>
 </html>
