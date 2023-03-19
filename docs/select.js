@@ -44,9 +44,10 @@ var bootstrap5 = (function (t, e) {
     C,
     S,
     T,
-    D,
     q,
-    A;
+    A,
+    D,
+    P;
   return (
     (n = new WeakMap()),
     (l = new WeakMap()),
@@ -61,9 +62,10 @@ var bootstrap5 = (function (t, e) {
     (C = new WeakMap()),
     (S = new WeakMap()),
     (T = new WeakMap()),
-    (D = new WeakMap()),
     (q = new WeakMap()),
     (A = new WeakMap()),
+    (D = new WeakMap()),
+    (P = new WeakMap()),
     (a = new WeakSet()),
     (d = function (t, e = !0) {
       Array.from(s(this, h, "f").options).find((e) => e.value === t).selected =
@@ -210,7 +212,7 @@ var bootstrap5 = (function (t, e) {
                       (e.dataset.value = i.value),
                       (e.dataset.label = i.label),
                       e.classList.add("dropdown-item"),
-                      e.addEventListener("click", s(this, A, "f")),
+                      e.addEventListener("click", s(this, D, "f")),
                       t.push(e);
                   }
                 }
@@ -222,13 +224,13 @@ var bootstrap5 = (function (t, e) {
                 s(this, o, "f").replaceChildren(...t),
                 s(this, r, "f").show());
           }),
-          D.set(this, (t) => {
+          q.set(this, (t) => {
             0 === s(this, o, "f").children.length && t.preventDefault();
           }),
-          q.set(this, (t) => {
+          A.set(this, (t) => {
             s(this, o, "f").scroll(0, 0);
           }),
-          A.set(this, (t) => {
+          D.set(this, (t) => {
             const e = t.target,
               i = e.dataset.label,
               n = e.dataset.value;
@@ -236,6 +238,13 @@ var bootstrap5 = (function (t, e) {
               s(this, a, "m", u).call(this, i, n),
               s(this, a, "m", p).call(this),
               s(this, a, "m", v).call(this);
+          }),
+          P.set(this, () => {
+            s(this, n, "f")
+              .querySelectorAll(".option")
+              .forEach((t) => t.remove());
+            for (const t of s(this, h, "f").options)
+              t.selected && s(this, a, "m", u).call(this, t.label, t.value);
           }),
           i(this, n, t, "f"),
           i(this, l, s(this, n, "f").querySelector("input"), "f"),
@@ -249,12 +258,11 @@ var bootstrap5 = (function (t, e) {
             "" === s(this, n, "f").dataset.mutable ||
               "true" === s(this, n, "f").dataset.mutable,
             "f"
-          );
-        for (const t of s(this, h, "f").options)
-          t.selected && s(this, a, "m", u).call(this, t.label, t.value);
-        Object.defineProperty(s(this, n, "f"), "value", {
-          get: s(this, M, "f"),
-        }),
+          ),
+          s(this, P, "f").call(this),
+          Object.defineProperty(s(this, n, "f"), "value", {
+            get: s(this, M, "f"),
+          }),
           s(this, l, "f").addEventListener("keydown", s(this, L, "f")),
           s(this, l, "f").addEventListener(
             "input",
@@ -262,11 +270,12 @@ var bootstrap5 = (function (t, e) {
           ),
           s(this, l, "f").addEventListener("focusin", s(this, C, "f")),
           s(this, l, "f").addEventListener("focusout", s(this, S, "f")),
-          s(this, l, "f").addEventListener("show.bs.dropdown", s(this, D, "f")),
+          s(this, l, "f").addEventListener("show.bs.dropdown", s(this, q, "f")),
           s(this, l, "f").addEventListener(
             "shown.bs.dropdown",
-            s(this, q, "f")
+            s(this, A, "f")
           ),
+          s(this, h, "f").addEventListener("change", s(this, P, "f")),
           s(this, n, "f").addEventListener("click", s(this, g, "f"));
       }
     }),

@@ -22,11 +22,7 @@ export class Select {
       this.#element.dataset.mutable === "" ||
       this.#element.dataset.mutable === "true";
 
-    for (const option of this.#select.options) {
-      if (option.selected) {
-        this.#addTag(option.label, option.value);
-      }
-    }
+    this.#onSelectChange();
 
     Object.defineProperty(this.#element, "value", { get: this.#getValue });
 
@@ -37,15 +33,8 @@ export class Select {
     this.#input.addEventListener("show.bs.dropdown", this.#onShowBsDropdown);
     this.#input.addEventListener("shown.bs.dropdown", this.#onShownBsDropdown);
 
+    this.#select.addEventListener("change", this.#onSelectChange);
     this.#element.addEventListener("click", this.#onClick);
-  }
-
-  #setSelected(value: string, selected = true) {
-    const option = Array.from(this.#select.options).find(
-      (option) => option.value === value
-    );
-
-    option.selected = selected;
   }
 
   #addTag(label: string, value = "") {
@@ -84,6 +73,14 @@ export class Select {
       .toUpperCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  #setSelected(value: string, selected = true) {
+    const option = Array.from(this.#select.options).find(
+      (option) => option.value === value
+    );
+
+    option.selected = selected;
   }
 
   #addItem() {
@@ -272,5 +269,15 @@ export class Select {
     this.#addTag(label, value);
     this.#resetInput();
     this.#dispatchInput();
+  };
+
+  #onSelectChange = () => {
+    this.#element.querySelectorAll(".option").forEach((el) => el.remove());
+
+    for (const option of this.#select.options) {
+      if (option.selected) {
+        this.#addTag(option.label, option.value);
+      }
+    }
   };
 }
