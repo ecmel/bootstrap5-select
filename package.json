@@ -27,7 +27,7 @@
     "node": "./dist/select.mjs",
     "types": "./dist/select.d.ts"
   },
-  "main": "./dist/select.js",
+  "main": "./dist/select.cjs",
   "module": "./dist/select.mjs",
   "sass": "./select.scss",
   "scripts": {
