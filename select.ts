@@ -222,7 +222,9 @@ export class Select {
     this.#element.classList.remove("focus");
   };
 
-  #onInput = () => {
+  #onInput = (event: Event) => {
+    event.stopPropagation();
+
     const items = [];
     const value = this.#normalize(this.#input.value);
 
