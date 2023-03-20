@@ -1,7 +1,7 @@
 import { Dropdown } from "bootstrap";
 
 export class Select {
-  static map = new WeakMap<Element, Select>();
+  private static map = new WeakMap<Element, Select>();
 
   static getInstance(el: Element) {
     return this.map.get(el);
@@ -17,53 +17,54 @@ export class Select {
     return instance;
   }
 
-  #element: HTMLElement;
-  #input: HTMLInputElement;
-  #select: HTMLSelectElement;
-  #menu: HTMLElement;
-  #dropdown: Dropdown;
-  #mutable = false;
-  #count = 0;
+  declare readonly value: string;
+  private element: HTMLElement;
+  private input: HTMLInputElement;
+  private select: HTMLSelectElement;
+  private menu: HTMLElement;
+  private dropdown: Dropdown;
+  private mutable = false;
+  private count = 0;
 
   constructor(element: Element) {
-    this.#element = element as HTMLElement;
-    this.#input = this.#element.querySelector("input");
-    this.#select = this.#element.querySelector("select");
-    this.#menu = this.#element.querySelector(".dropdown-menu");
-    this.#dropdown = Dropdown.getOrCreateInstance(this.#input);
+    this.element = element as HTMLElement;
+    this.input = this.element.querySelector("input");
+    this.select = this.element.querySelector("select");
+    this.menu = this.element.querySelector(".dropdown-menu");
+    this.dropdown = Dropdown.getOrCreateInstance(this.input);
 
-    this.#input.autocomplete = "off";
+    this.input.autocomplete = "off";
 
-    this.#mutable =
-      this.#element.dataset.mutable === "" ||
-      this.#element.dataset.mutable === "true";
+    this.mutable =
+      this.element.dataset.mutable === "" ||
+      this.element.dataset.mutable === "true";
 
-    Object.defineProperty(this.#element, "value", { get: this.#getValue });
+    Object.defineProperty(this.element, "value", { get: this.getValue });
 
-    this.#input.addEventListener("keydown", this.#onKeyDown);
-    this.#input.addEventListener("input", this.#debounce(this.#onInput));
-    this.#input.addEventListener("focusin", this.#onFocusIn);
-    this.#input.addEventListener("focusout", this.#onFocusOut);
-    this.#input.addEventListener("show.bs.dropdown", this.#onShowBsDropdown);
-    this.#input.addEventListener("shown.bs.dropdown", this.#onShownBsDropdown);
-    this.#element.addEventListener("click", this.#onClick);
+    this.input.addEventListener("keydown", this.onKeyDown);
+    this.input.addEventListener("input", this.debounce(this.onInput));
+    this.input.addEventListener("focusin", this.onFocusIn);
+    this.input.addEventListener("focusout", this.onFocusOut);
+    this.input.addEventListener("show.bs.dropdown", this.onShowBsDropdown);
+    this.input.addEventListener("shown.bs.dropdown", this.onShownBsDropdown);
+    this.element.addEventListener("click", this.onClick);
 
-    Select.map.set(this.#element, this);
+    Select.map.set(this.element, this);
 
     this.update();
   }
 
   update() {
-    this.#element
+    this.element
       .querySelectorAll(".option")
-      .forEach((el) => this.#removeTag(el));
+      .forEach((el) => this.removeTag(el));
 
-    for (const option of this.#select.selectedOptions) {
-      this.#addTag(option.label, option.value);
+    for (const option of this.select.selectedOptions) {
+      this.addTag(option.label, option.value);
     }
   }
 
-  #addTag(label: string, value = "") {
+  private addTag(label: string, value = "") {
     const tag = document.createElement("span");
 
     tag.classList.add("option");
@@ -72,26 +73,26 @@ export class Select {
     tag.dataset.label = label;
     tag.dataset.value = value || label;
 
-    this.#count++;
-    this.#element.insertBefore(tag, this.#input);
+    this.count++;
+    this.element.insertBefore(tag, this.input);
   }
 
-  #removeTag(tag: Element) {
-    this.#count--;
+  private removeTag(tag: Element) {
+    this.count--;
     tag.remove();
   }
 
-  #resetInput() {
-    this.#input.value = "";
-    this.#menu.replaceChildren();
+  private resetInput() {
+    this.input.value = "";
+    this.menu.replaceChildren();
   }
 
-  #dispatchChanged() {
-    this.#element.dispatchEvent(new CustomEvent("changed.bs5.select"));
-    this.#element.dispatchEvent(new CustomEvent("input"));
+  private dispatchChanged() {
+    this.element.dispatchEvent(new CustomEvent("changed.bs5.select"));
+    this.element.dispatchEvent(new CustomEvent("input"));
   }
 
-  #normalize(value: string) {
+  private normalize(value: string) {
     return value
       .trim()
       .toUpperCase()
@@ -99,34 +100,34 @@ export class Select {
       .replace(/[\u0300-\u036f]/g, "");
   }
 
-  #setSelected(value: string, selected = true) {
-    const option = Array.from(this.#select.options).find(
+  private setSelected(value: string, selected = true) {
+    const option = Array.from(this.select.options).find(
       (option) => option.value === value
     );
 
     option.selected = selected;
   }
 
-  #addItem() {
-    const active = this.#getActive();
+  private addItem() {
+    const active = this.getActive();
 
     if (active) {
       const label = active.dataset.label;
       const value = active.dataset.value;
 
-      this.#addTag(label, value);
-      this.#setSelected(value);
-    } else if (this.#mutable) {
-      const value = this.#input.value;
+      this.addTag(label, value);
+      this.setSelected(value);
+    } else if (this.mutable) {
+      const value = this.input.value;
 
-      const found = Array.from(this.#select.options).find(
+      const found = Array.from(this.select.options).find(
         (option) => option.value.trim() === value.trim()
       );
 
       if (found) {
         if (!found.selected) {
-          this.#addTag(value);
-          this.#setSelected(value);
+          this.addTag(value);
+          this.setSelected(value);
         }
       } else {
         const option = document.createElement("option");
@@ -134,31 +135,31 @@ export class Select {
         option.value = value;
         option.label = value;
 
-        this.#select.options.add(option);
+        this.select.options.add(option);
 
-        this.#addTag(value);
-        this.#setSelected(value);
+        this.addTag(value);
+        this.setSelected(value);
       }
     }
 
-    this.#dispatchChanged();
-    this.#resetInput();
+    this.dispatchChanged();
+    this.resetInput();
 
-    this.#dropdown.hide();
+    this.dropdown.hide();
   }
 
-  #removeItem() {
-    const tag = this.#input.previousElementSibling as HTMLElement;
+  private removeItem() {
+    const tag = this.input.previousElementSibling as HTMLElement;
 
     if (tag) {
-      this.#removeTag(tag);
-      this.#setSelected(tag.dataset.value, false);
-      this.#dispatchChanged();
+      this.removeTag(tag);
+      this.setSelected(tag.dataset.value, false);
+      this.dispatchChanged();
     }
   }
 
-  #nextItem(backward = false) {
-    const active = this.#getActive();
+  private nextItem(backward = false) {
+    const active = this.getActive();
 
     if (active) {
       active.classList.remove("active");
@@ -175,8 +176,8 @@ export class Select {
     }
 
     const next = backward
-      ? this.#menu.lastElementChild
-      : this.#menu.firstElementChild;
+      ? this.menu.lastElementChild
+      : this.menu.firstElementChild;
 
     if (next) {
       next.classList.add("active");
@@ -184,11 +185,11 @@ export class Select {
     }
   }
 
-  #getActive(): HTMLElement {
-    return this.#menu.querySelector(".active");
+  private getActive(): HTMLElement {
+    return this.menu.querySelector(".active");
   }
 
-  #debounce(cb: Function, delay = 250) {
+  private debounce(cb: Function, delay = 250) {
     let timeout: any;
 
     return (...args: any[]) => {
@@ -197,57 +198,57 @@ export class Select {
     };
   }
 
-  #getValue = () => {
-    return this.#count === 0 ? "" : this.#count.toString();
+  private getValue = () => {
+    return this.count === 0 ? "" : this.count.toString();
   };
 
-  #onClick = () => {
-    this.#input.focus();
+  private onClick = () => {
+    this.input.focus();
   };
 
-  #onKeyDown = (event: KeyboardEvent) => {
+  private onKeyDown = (event: KeyboardEvent) => {
     switch (event.key) {
       case "Enter":
-        if (this.#input.value.length !== 0) {
+        if (this.input.value.length !== 0) {
           event.preventDefault();
-          this.#addItem();
+          this.addItem();
         }
         break;
 
       case "Backspace":
-        if (this.#input.value.length === 0) {
-          this.#removeItem();
+        if (this.input.value.length === 0) {
+          this.removeItem();
         }
         break;
 
       case "ArrowDown":
-        this.#nextItem();
+        this.nextItem();
         break;
 
       case "ArrowUp":
-        this.#nextItem(true);
+        this.nextItem(true);
         break;
     }
   };
 
-  #onFocusIn = () => {
-    this.#element.classList.add("focus");
+  private onFocusIn = () => {
+    this.element.classList.add("focus");
   };
 
-  #onFocusOut = () => {
-    this.#element.classList.remove("focus");
+  private onFocusOut = () => {
+    this.element.classList.remove("focus");
   };
 
-  #onInput = (event: Event) => {
+  private onInput = (event: Event) => {
     event.stopPropagation();
 
     const items = [];
-    const value = this.#normalize(this.#input.value);
+    const value = this.normalize(this.input.value);
 
     if (value.length > 0) {
-      for (const option of this.#select.options) {
+      for (const option of this.select.options) {
         if (!option.selected) {
-          const label = this.#normalize(option.label);
+          const label = this.normalize(option.label);
 
           if (label.includes(value)) {
             const item = document.createElement("button");
@@ -257,7 +258,7 @@ export class Select {
             item.dataset.value = option.value;
             item.dataset.label = option.label;
             item.classList.add("dropdown-item");
-            item.addEventListener("click", this.#onItemClick);
+            item.addEventListener("click", this.onItemClick);
 
             items.push(item);
           }
@@ -266,34 +267,34 @@ export class Select {
     }
 
     if (items.length === 0) {
-      this.#dropdown.hide();
-      this.#menu.replaceChildren();
+      this.dropdown.hide();
+      this.menu.replaceChildren();
     } else {
       items.sort((a, b) => a.dataset.label.localeCompare(b.dataset.label));
-      this.#menu.replaceChildren(...items);
-      this.#dropdown.show();
+      this.menu.replaceChildren(...items);
+      this.dropdown.show();
     }
   };
 
-  #onShowBsDropdown = (event: Event) => {
-    if (this.#menu.children.length === 0) {
+  private onShowBsDropdown = (event: Event) => {
+    if (this.menu.children.length === 0) {
       event.preventDefault();
     }
   };
 
-  #onShownBsDropdown = (event: Event) => {
-    this.#menu.scroll(0, 0);
+  private onShownBsDropdown = (event: Event) => {
+    this.menu.scroll(0, 0);
   };
 
-  #onItemClick = (event: Event) => {
+  private onItemClick = (event: Event) => {
     const button = event.target as HTMLElement;
 
     const label = button.dataset.label;
     const value = button.dataset.value;
 
-    this.#setSelected(value);
-    this.#addTag(label, value);
-    this.#resetInput();
-    this.#dispatchChanged();
+    this.setSelected(value);
+    this.addTag(label, value);
+    this.resetInput();
+    this.dispatchChanged();
   };
 }
