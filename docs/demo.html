@@ -30,7 +30,7 @@
           <div id="simple" class="form-control select">
             <input id="simple_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
-            <select name="place" multiple hidden>
+            <select name="simple" multiple hidden>
               <option value="01" selected>Red</option>
               <option value="02" selected>Green</option>
               <option value="03">Blue</option>
@@ -235,6 +235,10 @@
         document
           .querySelectorAll(".select")
           .forEach((el) => new bootstrap5.Select(el));
+
+        document
+          .querySelector("#simple")
+          .addEventListener("changed.bs5.select", () => console.log("CHANGED"));
 
         const validate = new window.JustValidate("#form", {
           successFieldStyle: "",

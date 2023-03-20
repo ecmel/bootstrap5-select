@@ -1,6 +1,22 @@
 import { Dropdown } from "bootstrap";
 
 export class Select {
+  static map = new WeakMap<Element, Select>();
+
+  static getInstance(el: Element) {
+    return this.map.get(el);
+  }
+
+  static getOrCreateInstance(el: Element) {
+    let instance = this.map.get(el);
+
+    if (!instance) {
+      instance = new Select(el);
+    }
+
+    return instance;
+  }
+
   #element: HTMLElement;
   #input: HTMLInputElement;
   #select: HTMLSelectElement;
@@ -32,16 +48,18 @@ export class Select {
     this.#input.addEventListener("shown.bs.dropdown", this.#onShownBsDropdown);
     this.#element.addEventListener("click", this.#onClick);
 
+    Select.map.set(this.#element, this);
+
     this.update();
   }
 
   update() {
-    this.#element.querySelectorAll(".option").forEach((el) => el.remove);
+    this.#element
+      .querySelectorAll(".option")
+      .forEach((el) => this.#removeTag(el));
 
-    for (const option of this.#select.options) {
-      if (option.selected) {
-        this.#addTag(option.label, option.value);
-      }
+    for (const option of this.#select.selectedOptions) {
+      this.#addTag(option.label, option.value);
     }
   }
 
@@ -49,9 +67,6 @@ export class Select {
     const tag = document.createElement("span");
 
     tag.classList.add("option");
-
-    label = label.trim();
-    value = value.trim();
 
     tag.innerText = label;
     tag.dataset.label = label;
@@ -61,7 +76,7 @@ export class Select {
     this.#element.insertBefore(tag, this.#input);
   }
 
-  #removeTag(tag: HTMLElement) {
+  #removeTag(tag: Element) {
     this.#count--;
     tag.remove();
   }
@@ -71,7 +86,8 @@ export class Select {
     this.#menu.replaceChildren();
   }
 
-  #dispatchInput() {
+  #dispatchChanged() {
+    this.#element.dispatchEvent(new CustomEvent("changed.bs5.select"));
     this.#element.dispatchEvent(new CustomEvent("input"));
   }
 
@@ -125,7 +141,7 @@ export class Select {
       }
     }
 
-    this.#dispatchInput();
+    this.#dispatchChanged();
     this.#resetInput();
 
     this.#dropdown.hide();
@@ -137,7 +153,7 @@ export class Select {
     if (tag) {
       this.#removeTag(tag);
       this.#setSelected(tag.dataset.value, false);
-      this.#dispatchInput();
+      this.#dispatchChanged();
     }
   }
 
@@ -278,6 +294,6 @@ export class Select {
     this.#setSelected(value);
     this.#addTag(label, value);
     this.#resetInput();
-    this.#dispatchInput();
+    this.#dispatchChanged();
   };
 }
