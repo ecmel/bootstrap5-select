@@ -27,7 +27,7 @@
 
         <div class="mb-3">
           <label for="simple_input" class="form-label">Select:</label>
-          <div id="simple" class="form-control select">
+          <div id="simple" class="form-control select multiple">
             <input id="simple_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
             <select name="simple" multiple hidden>
@@ -40,7 +40,7 @@
 
         <div class="mb-3">
           <label for="city_input" class="form-label">Select cities:</label>
-          <div id="city" class="form-control select">
+          <div id="city" class="form-control select multiple">
             <input id="city_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
             <select name="city" multiple hidden>
@@ -132,7 +132,7 @@
           <label for="place_input" class="form-label"
             >Optionally select or enter 2 or more places:</label
           >
-          <div id="place" class="form-control select" data-mutable>
+          <div id="place" class="form-control select multiple" data-mutable>
             <input id="place_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
             <select name="place" multiple hidden>
@@ -220,6 +220,19 @@
           </div>
         </div>
 
+        <div class="mb-3">
+          <label for="single_input" class="form-label">Select single:</label>
+          <div id="single" class="form-control select single">
+            <input id="single_input" type="text" data-bs-toggle="dropdown" />
+            <div class="dropdown-menu"></div>
+            <select name="simple" multiple hidden>
+              <option value="06" selected>ANKARA</option>
+              <option value="34">İSTANBUL</option>
+              <option value="32">İZMİR</option>
+            </select>
+          </div>
+        </div>
+
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
@@ -272,6 +285,12 @@
             {
               rule: "minNumber",
               value: 2,
+            },
+          ])
+          .addField("#single", [
+            {
+              rule: "maxNumber",
+              value: 1,
             },
           ]);
       });

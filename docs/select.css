@@ -18,7 +18,11 @@
   overflow-y: auto;
 }
 
-.select .option {
+.single .option {
+  margin-right: 0.25rem;
+}
+
+.multiple .option {
   --bs-badge-padding-x: 0.65em;
   --bs-badge-padding-y: 0.35em;
   --bs-badge-font-size: 0.75em;
