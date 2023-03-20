@@ -26,105 +26,15 @@
         </div>
 
         <div class="mb-3">
-          <label for="simple_input" class="form-label">Select:</label>
-          <div id="simple" class="form-control select multiple">
-            <input id="simple_input" type="text" data-bs-toggle="dropdown" />
-            <div class="dropdown-menu"></div>
-            <select name="simple" multiple hidden>
-              <option value="01" selected>Red</option>
-              <option value="02" selected>Green</option>
-              <option value="03">Blue</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="mb-3">
           <label for="city_input" class="form-label">Select cities:</label>
-          <div id="city" class="form-control select multiple">
+          <div
+            id="city"
+            class="form-control select multiple"
+            data-list="cities"
+          >
             <input id="city_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
-            <select name="city" multiple hidden>
-              <option value="01">ADANA</option>
-              <option value="02">ADIYAMAN</option>
-              <option value="03">AFYONKARAHİSAR</option>
-              <option value="04">AĞRI</option>
-              <option value="05">AMASYA</option>
-              <option value="06">ANKARA</option>
-              <option value="07">ANTALYA</option>
-              <option value="08">ARTVİN</option>
-              <option value="09">AYDIN</option>
-              <option value="10">BALIKESİR</option>
-              <option value="11">BİLECİK</option>
-              <option value="12">BİNGÖL</option>
-              <option value="13">BİTLİS</option>
-              <option value="14">BOLU</option>
-              <option value="15">BURDUR</option>
-              <option value="16">BURSA</option>
-              <option value="17">ÇANAKKALE</option>
-              <option value="18">ÇANKIRI</option>
-              <option value="19">ÇORUM</option>
-              <option value="20">DENİZLİ</option>
-              <option value="21">DİYARBAKIR</option>
-              <option value="22">EDİRNE</option>
-              <option value="23">ELAZIĞ</option>
-              <option value="24">ERZİNCAN</option>
-              <option value="25">ERZURUM</option>
-              <option value="26">ESKİŞEHİR</option>
-              <option value="27">GAZİANTEP</option>
-              <option value="28">GİRESUN</option>
-              <option value="29">GÜMÜŞHANE</option>
-              <option value="30">HAKKARİ</option>
-              <option value="31">HATAY</option>
-              <option value="32">ISPARTA</option>
-              <option value="33">MERSİN</option>
-              <option value="34">İSTANBUL</option>
-              <option value="35">İZMİR</option>
-              <option value="36">KARS</option>
-              <option value="37">KASTAMONU</option>
-              <option value="38">KAYSERİ</option>
-              <option value="39">KIRKLARELİ</option>
-              <option value="40">KIRŞEHİR</option>
-              <option value="42">KONYA</option>
-              <option value="43">KÜTAHYA</option>
-              <option value="44">MALATYA</option>
-              <option value="45">MANİSA</option>
-              <option value="46">KAHRAMANMARAŞ</option>
-              <option value="47">MARDİN</option>
-              <option value="48">MUĞLA</option>
-              <option value="49">MUŞ</option>
-              <option value="50">NEVŞEHİR</option>
-              <option value="51">NİĞDE</option>
-              <option value="52">ORDU</option>
-              <option value="53">RİZE</option>
-              <option value="54">SAKARYA</option>
-              <option value="55">SAMSUN</option>
-              <option value="56">SİİRT</option>
-              <option value="57">SİNOP</option>
-              <option value="58">SİVAS</option>
-              <option value="59">TEKİRDAĞ</option>
-              <option value="60">TOKAT</option>
-              <option value="61">TRABZON</option>
-              <option value="62">TUNCELİ</option>
-              <option value="63">ŞANLIURFA</option>
-              <option value="64">UŞAK</option>
-              <option value="65">VAN</option>
-              <option value="66">YOZGAT</option>
-              <option value="67">ZONGULDAK</option>
-              <option value="68">AKSARAY</option>
-              <option value="69">BAYBURT</option>
-              <option value="70">KARAMAN</option>
-              <option value="71">KIRIKKALE</option>
-              <option value="72">BATMAN</option>
-              <option value="73">ŞIRNAK</option>
-              <option value="74">BARTIN</option>
-              <option value="75">ARDAHAN</option>
-              <option value="76">IĞDIR</option>
-              <option value="77">YALOVA</option>
-              <option value="78">KARABÜK</option>
-              <option value="79">KİLİS</option>
-              <option value="80">OSMANİYE</option>
-              <option value="81">DÜZCE</option>
-            </select>
+            <select name="city" multiple hidden></select>
           </div>
         </div>
 
@@ -132,103 +42,29 @@
           <label for="place_input" class="form-label"
             >Optionally select or enter 2 or more places:</label
           >
-          <div id="place" class="form-control select multiple" data-mutable>
+          <div
+            id="place"
+            class="form-control select multiple"
+            data-list="cities"
+            data-mutable
+          >
             <input id="place_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
-            <select name="place" multiple hidden>
-              <option value="01">ADANA</option>
-              <option value="02">ADIYAMAN</option>
-              <option value="03">AFYONKARAHİSAR</option>
-              <option value="04">AĞRI</option>
-              <option value="05">AMASYA</option>
-              <option value="06">ANKARA</option>
-              <option value="07">ANTALYA</option>
-              <option value="08">ARTVİN</option>
-              <option value="09">AYDIN</option>
-              <option value="10">BALIKESİR</option>
-              <option value="11">BİLECİK</option>
-              <option value="12">BİNGÖL</option>
-              <option value="13">BİTLİS</option>
-              <option value="14">BOLU</option>
-              <option value="15">BURDUR</option>
-              <option value="16">BURSA</option>
-              <option value="17">ÇANAKKALE</option>
-              <option value="18">ÇANKIRI</option>
-              <option value="19">ÇORUM</option>
-              <option value="20">DENİZLİ</option>
-              <option value="21">DİYARBAKIR</option>
-              <option value="22">EDİRNE</option>
-              <option value="23">ELAZIĞ</option>
-              <option value="24">ERZİNCAN</option>
-              <option value="25">ERZURUM</option>
-              <option value="26">ESKİŞEHİR</option>
-              <option value="27">GAZİANTEP</option>
-              <option value="28">GİRESUN</option>
-              <option value="29">GÜMÜŞHANE</option>
-              <option value="30">HAKKARİ</option>
-              <option value="31">HATAY</option>
-              <option value="32">ISPARTA</option>
-              <option value="33">MERSİN</option>
-              <option value="34">İSTANBUL</option>
-              <option value="35">İZMİR</option>
-              <option value="36">KARS</option>
-              <option value="37">KASTAMONU</option>
-              <option value="38">KAYSERİ</option>
-              <option value="39">KIRKLARELİ</option>
-              <option value="40">KIRŞEHİR</option>
-              <option value="42">KONYA</option>
-              <option value="43">KÜTAHYA</option>
-              <option value="44">MALATYA</option>
-              <option value="45">MANİSA</option>
-              <option value="46">KAHRAMANMARAŞ</option>
-              <option value="47">MARDİN</option>
-              <option value="48">MUĞLA</option>
-              <option value="49">MUŞ</option>
-              <option value="50">NEVŞEHİR</option>
-              <option value="51">NİĞDE</option>
-              <option value="52">ORDU</option>
-              <option value="53">RİZE</option>
-              <option value="54">SAKARYA</option>
-              <option value="55">SAMSUN</option>
-              <option value="56">SİİRT</option>
-              <option value="57">SİNOP</option>
-              <option value="58">SİVAS</option>
-              <option value="59">TEKİRDAĞ</option>
-              <option value="60">TOKAT</option>
-              <option value="61">TRABZON</option>
-              <option value="62">TUNCELİ</option>
-              <option value="63">ŞANLIURFA</option>
-              <option value="64">UŞAK</option>
-              <option value="65">VAN</option>
-              <option value="66">YOZGAT</option>
-              <option value="67">ZONGULDAK</option>
-              <option value="68">AKSARAY</option>
-              <option value="69">BAYBURT</option>
-              <option value="70">KARAMAN</option>
-              <option value="71">KIRIKKALE</option>
-              <option value="72">BATMAN</option>
-              <option value="73">ŞIRNAK</option>
-              <option value="74">BARTIN</option>
-              <option value="75">ARDAHAN</option>
-              <option value="76">IĞDIR</option>
-              <option value="77">YALOVA</option>
-              <option value="78">KARABÜK</option>
-              <option value="79">KİLİS</option>
-              <option value="80">OSMANİYE</option>
-              <option value="81">DÜZCE</option>
-            </select>
+            <select name="place" multiple hidden></select>
           </div>
         </div>
 
         <div class="mb-3">
           <label for="single_input" class="form-label">Select single:</label>
-          <div id="single" class="form-control select single">
+          <div
+            id="single"
+            class="form-control select single"
+            data-list="cities"
+          >
             <input id="single_input" type="text" data-bs-toggle="dropdown" />
             <div class="dropdown-menu"></div>
-            <select name="simple" multiple hidden>
+            <select name="single" multiple hidden>
               <option value="06" selected>ANKARA</option>
-              <option value="34">İSTANBUL</option>
-              <option value="32">İZMİR</option>
             </select>
           </div>
         </div>
@@ -236,6 +72,90 @@
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
+
+    <datalist id="cities">
+      <option value="01">ADANA</option>
+      <option value="02">ADIYAMAN</option>
+      <option value="03">AFYONKARAHİSAR</option>
+      <option value="04">AĞRI</option>
+      <option value="05">AMASYA</option>
+      <option value="06">ANKARA</option>
+      <option value="07">ANTALYA</option>
+      <option value="08">ARTVİN</option>
+      <option value="09">AYDIN</option>
+      <option value="10">BALIKESİR</option>
+      <option value="11">BİLECİK</option>
+      <option value="12">BİNGÖL</option>
+      <option value="13">BİTLİS</option>
+      <option value="14">BOLU</option>
+      <option value="15">BURDUR</option>
+      <option value="16">BURSA</option>
+      <option value="17">ÇANAKKALE</option>
+      <option value="18">ÇANKIRI</option>
+      <option value="19">ÇORUM</option>
+      <option value="20">DENİZLİ</option>
+      <option value="21">DİYARBAKIR</option>
+      <option value="22">EDİRNE</option>
+      <option value="23">ELAZIĞ</option>
+      <option value="24">ERZİNCAN</option>
+      <option value="25">ERZURUM</option>
+      <option value="26">ESKİŞEHİR</option>
+      <option value="27">GAZİANTEP</option>
+      <option value="28">GİRESUN</option>
+      <option value="29">GÜMÜŞHANE</option>
+      <option value="30">HAKKARİ</option>
+      <option value="31">HATAY</option>
+      <option value="32">ISPARTA</option>
+      <option value="33">MERSİN</option>
+      <option value="34">İSTANBUL</option>
+      <option value="35">İZMİR</option>
+      <option value="36">KARS</option>
+      <option value="37">KASTAMONU</option>
+      <option value="38">KAYSERİ</option>
+      <option value="39">KIRKLARELİ</option>
+      <option value="40">KIRŞEHİR</option>
+      <option value="42">KONYA</option>
+      <option value="43">KÜTAHYA</option>
+      <option value="44">MALATYA</option>
+      <option value="45">MANİSA</option>
+      <option value="46">KAHRAMANMARAŞ</option>
+      <option value="47">MARDİN</option>
+      <option value="48">MUĞLA</option>
+      <option value="49">MUŞ</option>
+      <option value="50">NEVŞEHİR</option>
+      <option value="51">NİĞDE</option>
+      <option value="52">ORDU</option>
+      <option value="53">RİZE</option>
+      <option value="54">SAKARYA</option>
+      <option value="55">SAMSUN</option>
+      <option value="56">SİİRT</option>
+      <option value="57">SİNOP</option>
+      <option value="58">SİVAS</option>
+      <option value="59">TEKİRDAĞ</option>
+      <option value="60">TOKAT</option>
+      <option value="61">TRABZON</option>
+      <option value="62">TUNCELİ</option>
+      <option value="63">ŞANLIURFA</option>
+      <option value="64">UŞAK</option>
+      <option value="65">VAN</option>
+      <option value="66">YOZGAT</option>
+      <option value="67">ZONGULDAK</option>
+      <option value="68">AKSARAY</option>
+      <option value="69">BAYBURT</option>
+      <option value="70">KARAMAN</option>
+      <option value="71">KIRIKKALE</option>
+      <option value="72">BATMAN</option>
+      <option value="73">ŞIRNAK</option>
+      <option value="74">BARTIN</option>
+      <option value="75">ARDAHAN</option>
+      <option value="76">IĞDIR</option>
+      <option value="77">YALOVA</option>
+      <option value="78">KARABÜK</option>
+      <option value="79">KİLİS</option>
+      <option value="80">OSMANİYE</option>
+      <option value="81">DÜZCE</option>
+    </datalist>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -248,10 +168,6 @@
         document
           .querySelectorAll(".select")
           .forEach((el) => new bootstrap5.Select(el));
-
-        document
-          .querySelector("#simple")
-          .addEventListener("changed.bs5.select", () => console.log("CHANGED"));
 
         const validate = new window.JustValidate("#form", {
           successFieldStyle: "",
@@ -272,11 +188,6 @@
             },
           ])
           .addField("#city", [
-            {
-              rule: "required",
-            },
-          ])
-          .addField("#simple", [
             {
               rule: "required",
             },

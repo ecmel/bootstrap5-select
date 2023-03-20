@@ -12,6 +12,7 @@ export class Select {
 
     if (!instance) {
       instance = new Select(el);
+      this.map.set(el, instance);
     }
 
     return instance;
@@ -22,6 +23,7 @@ export class Select {
   private input: HTMLInputElement;
   private select: HTMLSelectElement;
   private menu: HTMLElement;
+  private list: HTMLDataListElement;
   private dropdown: Dropdown;
   private mutable = false;
   private count = 0;
@@ -38,6 +40,12 @@ export class Select {
     this.mutable =
       this.element.dataset.mutable === "" ||
       this.element.dataset.mutable === "true";
+
+    const list = this.element.dataset.list;
+
+    if (list) {
+      this.list = document.getElementById(list) as HTMLDataListElement;
+    }
 
     Object.defineProperty(this.element, "value", { get: this.getValue });
 
@@ -101,9 +109,21 @@ export class Select {
   }
 
   private setSelected(value: string, selected = true) {
-    const option = Array.from(this.select.options).find(
+    let option = Array.from(this.select.options).find(
       (option) => option.value === value
     );
+
+    if (!option && this.list) {
+      let item = Array.from(this.list.options).find(
+        (option) => option.value === value
+      );
+
+      option = document.createElement("option");
+      option.value = item.value;
+      option.label = item.label;
+
+      this.select.options.add(option);
+    }
 
     option.selected = selected;
   }
@@ -240,13 +260,12 @@ export class Select {
   };
 
   private onInput = (event: Event) => {
-    event.stopPropagation();
-
     const items = [];
     const value = this.normalize(this.input.value);
+    const options = this.list ? this.list.options : this.select.options;
 
     if (value.length > 0) {
-      for (const option of this.select.options) {
+      for (const option of options) {
         if (!option.selected) {
           const label = this.normalize(option.label);
 
