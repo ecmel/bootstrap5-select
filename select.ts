@@ -114,13 +114,11 @@ export class Select {
     );
 
     if (!option && this.list) {
-      let item = Array.from(this.list.options).find(
+      const found = Array.from(this.list.options).find(
         (option) => option.value === value
       );
 
-      option = document.createElement("option");
-      option.value = item.value;
-      option.label = item.label;
+      option = found.cloneNode(true) as HTMLOptionElement;
 
       this.select.options.add(option);
     }
