@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 1986-2023 Ecmel Ercan <ecmel.ercan@gmail.com>
+ * Licensed under the MIT License
+ */
+
 import { Dropdown } from "bootstrap";
 
 export class Select {
