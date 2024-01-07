@@ -26,18 +26,23 @@
   "sass": "./select.scss",
   "scripts": {
     "clean": "git clean -Xdf",
-    "format": "prettier --ignore-path .gitignore --write .",
-    "build": "rollup -c",
-    "prepack": "npm run clean && npm install && npm run build"
+    "prereset": "npm run clean",
+    "reset": "npm install",
+    "update": "ncu -u -x prettier",
+    "format": "prettier --ignore-path .gitignore -w --list-different .",
+    "build": "rollup -c --forceExit",
+    "prepack": "npm run build"
   },
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "@types/bootstrap": "^5.2.6",
-    "bootstrap": "^5.2.3",
-    "prettier": "^2.8.4",
-    "rollup": "^3.19.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "tslib": "^2.5.0"
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/bootstrap": "^5.2.10",
+    "bootstrap": "^5.3.2",
+    "prettier": "^2.8.8",
+    "rollup": "^4.9.4",
+    "rollup-plugin-cleandir": "^2.0.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
   }
 }

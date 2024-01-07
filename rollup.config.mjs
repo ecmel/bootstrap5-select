@@ -1,3 +1,4 @@
+import { cleandir } from "rollup-plugin-cleandir";
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 import copy from "rollup-plugin-copy";
@@ -27,6 +28,7 @@ export default {
   ],
   external: ["bootstrap"],
   plugins: [
+    cleandir("dist"),
     typescript(),
     terser(),
     copy({
